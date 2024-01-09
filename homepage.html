@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Detection</title>
+</head>
+<body style="background-color: #f5e6f8;">
+    <h1>Animal Detection</h1>
+
+    <p>This Python Flask application uses the Vision API for animal detection to determine
+        the animals in the photo.
+    </p>
+
+    <br>
+
+    <form action="upload_photo" method="POST" enctype="multipart/form-data">
+        Upload File: <input type="file" name="file"><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+
+    {% for image_entity in image_entities %}
+        <img src="{{image_entity['image_public_url']}}" width=auto height=300>
+        <p>{{image_entity['blob_name']}} was uploaded {{image_entity['timestamp']}}.</p>
+        <p id="detected_animals">Animals in photo: {{', '.join(image_entity['detected_animals'])}}</p>
+        </br>
+    {% endfor %}
+</body>
+</html>
